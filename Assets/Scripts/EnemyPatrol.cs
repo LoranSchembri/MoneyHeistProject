@@ -2,10 +2,24 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
     {
-    public Transform[] waypoints;
     public float speed = 2.0f;
+    private Transform[] waypoints;
     private int waypointIndex = 0;
     private float distToPoint;
+
+    void Start()
+        {
+        // Find and assign waypoints tagged with "Waypoints"
+        GameObject[] waypointsObjects = GameObject.FindGameObjectsWithTag("Waypoints");
+        waypoints = new Transform[waypointsObjects.Length];
+        for (int i = 0; i < waypointsObjects.Length; i++)
+            {
+            waypoints[i] = waypointsObjects[i].transform;
+            }
+
+        // Select a random initial waypoint
+        waypointIndex = Random.Range(0, waypoints.Length);
+        }
 
     void Update()
         {
@@ -14,11 +28,13 @@ public class EnemyPatrol : MonoBehaviour
 
     void Move()
         {
+        if (waypoints.Length == 0) return;
+
         distToPoint = Vector3.Distance(transform.position, waypoints[waypointIndex].position);
 
         if (distToPoint < 1f)
             {
-            IncreaseIndex();
+            SelectRandomWaypoint();
             }
 
         Patrol();
@@ -30,12 +46,12 @@ public class EnemyPatrol : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointIndex].position, speed * Time.deltaTime);
         }
 
-    void IncreaseIndex()
+    void SelectRandomWaypoint()
         {
-        waypointIndex++;
-        if (waypointIndex >= waypoints.Length)
+        int oldIndex = waypointIndex;
+        while (waypointIndex == oldIndex) // Avoid selecting the same waypoint
             {
-            waypointIndex = 0;
+            waypointIndex = Random.Range(0, waypoints.Length);
             }
         }
 
