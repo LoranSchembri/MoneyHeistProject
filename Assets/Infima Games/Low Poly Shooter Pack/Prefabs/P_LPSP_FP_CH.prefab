@@ -1038,8 +1038,8 @@ MonoBehaviour:
   walkingMultiplierBackwards: 0.9
   airControl: 0.15
   gravity: 35
-  jumpGravity: 5
-  jumpForce: 0.5
+  jumpGravity: 35
+  jumpForce: 1.5
   stickToGroundForce: 0.03
   canCrouch: 1
   canCrouchWhileFalling: 0
@@ -5892,11 +5892,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 2544345319944641965, guid: 9482e0a2ae6a92742bbe72e00f29f763,
-        type: 3}
-      propertyPath: scopeArray.Array.data[4]
-      value: 
-      objectReference: {fileID: 1563653748197683730}
     - target: {fileID: 2554430389502693309, guid: 9482e0a2ae6a92742bbe72e00f29f763,
         type: 3}
       propertyPath: m_Layer
@@ -10319,22 +10314,26 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7760006461502462299, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 8174372834435582359, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 5932790140058088267, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 4717574566053208938, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 4415563077489328580, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 6304306483880944685, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 3841230486075475220, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 3982760254539293570, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 8341274822562275449, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 4974607330112171015, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 5578287539154031706, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 5539458128183976590, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 6217328707853259818, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 8438767940922161081, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 5950161074742785357, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
+    - {fileID: 758983631576659122, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9482e0a2ae6a92742bbe72e00f29f763, type: 3}
---- !u!114 &1563653748197683730 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5072221466411743552, guid: 9482e0a2ae6a92742bbe72e00f29f763,
-    type: 3}
-  m_PrefabInstance: {fileID: 6041315293858548562}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262a90da45c94c348be144e6130ec77b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8195332293463410009 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2480563158121336331, guid: 9482e0a2ae6a92742bbe72e00f29f763,

@@ -16,8 +16,7 @@ TagManager:
   - Wood (Static)
   - Dirt (Static)
   - Wood
-  - StealingPoint
-  - Enemy
+  - Car
   layers:
   - Default
   - TransparentFX
