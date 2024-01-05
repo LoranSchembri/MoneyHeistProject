@@ -1,15 +1,28 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyPatrol : MonoBehaviour
     {
-    public float speed = 2.0f;
+    public float patrolSpeed = 2.0f;
+    public float chaseSpeed = 4.0f;
+    public float detectionRange = 10.0f;
+
+    private NavMeshAgent navMeshAgent;
     private Transform[] waypoints;
     private int waypointIndex = 0;
-    private float distToPoint;
+    private bool isChasing = false;
+    private Transform player; // No longer assigned in the inspector
+
+    private Vector3 lastPosition;
+    private float stuckThreshold = 0.1f; // Distance to check if stuck
+    private float checkStuckInterval = 2f; // Time interval to check if stuck
+    private float stuckTimer = 0f;
 
     void Start()
         {
-        // Find and assign waypoints tagged with "Waypoints"
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.speed = patrolSpeed;
+
         GameObject[] waypointsObjects = GameObject.FindGameObjectsWithTag("Waypoints");
         waypoints = new Transform[waypointsObjects.Length];
         for (int i = 0; i < waypointsObjects.Length; i++)
@@ -17,41 +30,72 @@ public class EnemyPatrol : MonoBehaviour
             waypoints[i] = waypointsObjects[i].transform;
             }
 
-        // Select a random initial waypoint
-        waypointIndex = Random.Range(0, waypoints.Length);
+        SelectRandomWaypoint();
+        lastPosition = transform.position;
+
+        player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player using tag
         }
 
     void Update()
         {
-        Move();
-        }
-
-    void Move()
-        {
-        if (waypoints.Length == 0) return;
-
-        distToPoint = Vector3.Distance(transform.position, waypoints[waypointIndex].position);
-
-        if (distToPoint < 1f)
+        if (isChasing)
             {
-            SelectRandomWaypoint();
+            navMeshAgent.SetDestination(player.position);
+            }
+        else
+            {
+            Patrol();
             }
 
-        Patrol();
+        DetectPlayer();
+        CheckIfStuck();
         }
 
     void Patrol()
         {
-        transform.LookAt(waypoints[waypointIndex].position);
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[waypointIndex].position, speed * Time.deltaTime);
+        if (navMeshAgent.remainingDistance < 1f)
+            {
+            SelectRandomWaypoint();
+            }
         }
 
     void SelectRandomWaypoint()
         {
-        int oldIndex = waypointIndex;
-        while (waypointIndex == oldIndex) // Avoid selecting the same waypoint
+        if (waypoints.Length == 0) return;
+
+        waypointIndex = Random.Range(0, waypoints.Length);
+        navMeshAgent.SetDestination(waypoints[waypointIndex].position);
+        }
+
+    void DetectPlayer()
+        {
+        if (player != null)
             {
-            waypointIndex = Random.Range(0, waypoints.Length);
+            float distanceToPlayer = Vector3.Distance(player.position, transform.position);
+            if (distanceToPlayer < detectionRange)
+                {
+                isChasing = true;
+                navMeshAgent.speed = chaseSpeed;
+                }
+            else
+                {
+                isChasing = false;
+                navMeshAgent.speed = patrolSpeed;
+                }
+            }
+        }
+
+    void CheckIfStuck()
+        {
+        stuckTimer += Time.deltaTime;
+        if (stuckTimer >= checkStuckInterval)
+            {
+            if (Vector3.Distance(transform.position, lastPosition) < stuckThreshold)
+                {
+                SelectRandomWaypoint();
+                }
+            lastPosition = transform.position;
+            stuckTimer = 0f;
             }
         }
 
@@ -62,7 +106,7 @@ public class EnemyPatrol : MonoBehaviour
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             if (playerHealth != null)
                 {
-                playerHealth.TakeDamage(10); // Damage value can be adjusted
+                playerHealth.TakeDamage(10);
                 }
             }
         }

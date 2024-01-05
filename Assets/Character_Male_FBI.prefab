@@ -847,6 +847,7 @@ GameObject:
   - component: {fileID: 3260062040936935593}
   - component: {fileID: 8915774784496173333}
   - component: {fileID: 3717269249919215103}
+  - component: {fileID: 1934846637987150167}
   m_Layer: 0
   m_Name: Character_Male_FBI
   m_TagString: Enemy
@@ -878,7 +879,7 @@ Transform:
   - {fileID: 9024606439080180746}
   - {fileID: 2487377409325623950}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3260062040936935593
 Animator:
@@ -926,26 +927,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4226a5f8828ee6b4987e4069d05b2180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  speed: 2
+  patrolSpeed: 2
+  chaseSpeed: 5
+  detectionRange: 20
+  player: {fileID: 2748913124992463393, guid: 19eadcf8fbed56b4da77ca94c1b4145f, type: 3}
+--- !u!195 &1934846637987150167
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330786470764804829}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.7
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2351375349689224919
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,8 @@ TagManager:
   - Car
   - Enemy
   - Waypoints
+  - Walkable
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

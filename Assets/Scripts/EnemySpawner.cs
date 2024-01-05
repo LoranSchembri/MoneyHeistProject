@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
     {
     public GameObject enemyPrefab; // Assign in inspector
-    public Transform[] spawnPoints; // Assign in inspector
+    public string spawnPointTag = "SpawnPoint"; // Tag for spawn points
+    private List<Transform> spawnPoints;
     public float spawnInterval = 5f; // Time between each spawn
 
     private float timeSinceLastSpawn;
@@ -11,13 +13,20 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
         {
         timeSinceLastSpawn = spawnInterval;
+
+        // Find all GameObjects with the spawnPointTag and add to spawnPoints list
+        spawnPoints = new List<Transform>();
+        foreach (var spawnPoint in GameObject.FindGameObjectsWithTag(spawnPointTag))
+            {
+            spawnPoints.Add(spawnPoint.transform);
+            }
         }
 
     private void Update()
         {
         timeSinceLastSpawn += Time.deltaTime;
 
-        if (timeSinceLastSpawn >= spawnInterval)
+        if (timeSinceLastSpawn >= spawnInterval && spawnPoints.Count > 0)
             {
             SpawnEnemy();
             timeSinceLastSpawn = 0;
@@ -26,9 +35,8 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
         {
-        if (spawnPoints.Length == 0) return;
-
-        int spawnIndex = Random.Range(0, spawnPoints.Length);
+        int spawnIndex = Random.Range(0, spawnPoints.Count);
         Instantiate(enemyPrefab, spawnPoints[spawnIndex].position, Quaternion.identity);
+        spawnPoints.RemoveAt(spawnIndex); // Remove the used spawn point
         }
     }
