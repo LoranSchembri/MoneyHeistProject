@@ -17,6 +17,8 @@ TagManager:
   - Dirt (Static)
   - Wood
   - Car
+  - Enemy
+  - Waypoints
   layers:
   - Default
   - TransparentFX
