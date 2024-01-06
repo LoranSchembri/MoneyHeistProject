@@ -21,7 +21,7 @@ public class Cheat : MonoBehaviour
                 EnemyHealth.KillAll();
                 break;
             case "Level2Bank":
-
+                
                 break;
             case "Level3Helicopter":
                 
