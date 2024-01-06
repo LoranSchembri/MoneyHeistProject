@@ -21,7 +21,6 @@ public class Cheat : MonoBehaviour
                 EnemyHealth.KillAll();
                 break;
             case "Level2Bank":
-                SelfDestructCheat.RespawnPlayer();
 
                 break;
             case "Level3Helicopter":
