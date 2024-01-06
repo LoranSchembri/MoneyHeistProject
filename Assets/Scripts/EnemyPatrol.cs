@@ -17,6 +17,8 @@ public class EnemyPatrol : MonoBehaviour
     private float stuckThreshold = 0.1f; // Distance to check if stuck
     private float checkStuckInterval = 2f; // Time interval to check if stuck
     private float stuckTimer = 0f;
+    private float playerCheckInterval = 1f; // Interval to check for player's presence
+    private float nextPlayerCheckTime = 0f;
 
     void Start()
         {
@@ -32,22 +34,26 @@ public class EnemyPatrol : MonoBehaviour
 
         SelectRandomWaypoint();
         lastPosition = transform.position;
-
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player using tag
         }
 
     void Update()
         {
-        if (isChasing)
+        if (Time.time >= nextPlayerCheckTime)
+            {
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+            nextPlayerCheckTime = Time.time + playerCheckInterval;
+            }
+
+        if (player != null && isChasing)
             {
             navMeshAgent.SetDestination(player.position);
             }
         else
             {
             Patrol();
+            DetectPlayer();
             }
 
-        DetectPlayer();
         CheckIfStuck();
         }
 
