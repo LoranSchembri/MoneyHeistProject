@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Assign in inspector
+    public GameObject enemyPrefab;
     public GameObject bossPrefab;
     public string bossSpawnPointTag = "BossSpawnPoint";
     public string spawnPointTag = "SpawnPoint"; // Tag for spawn points
@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
             spawnPoints[i] = spawnPointObjects[i].transform;
         }
 
-        SpawnAllEnemies(); // Spawn enemies and boss once at start
+        SpawnAllEnemies();
     }
 
     void SpawnAllEnemies()

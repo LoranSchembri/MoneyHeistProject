@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1Park.unity
     guid: 00714072892c66f499c893430eee8566
+  - enabled: 1
+    path: Assets/Scenes/Level2Bank.unity
+    guid: 095ae55f91d9c3b4a9ebdde183c70c32
+  - enabled: 1
+    path: Assets/Scenes/Level3Helicopter.unity
+    guid: 34bb860f2328d664ebe310cfbbac9dfa
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9eb07e2d669e9c94e9d7d3c782a916f7,
       type: 2}

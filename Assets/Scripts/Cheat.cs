@@ -2,21 +2,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Cheat : MonoBehaviour
-{
-    void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+    void Update()
         {
+        if (Input.GetKeyDown(KeyCode.K))
+            {
             HandleCheatCode();
+            }
         }
-    }
 
     void HandleCheatCode()
-    {
+        {
         string currentScene = SceneManager.GetActiveScene().name;
 
         switch (currentScene)
-        {
+            {
             case "Level1Park":
                 EnemyHealth.KillAll();
                 break;
@@ -24,9 +24,9 @@ public class Cheat : MonoBehaviour
 
                 break;
             case "Level3Helicopter":
-                
-                break;
-        }
-    }
 
-}
+                break;
+            }
+        }
+
+    }
