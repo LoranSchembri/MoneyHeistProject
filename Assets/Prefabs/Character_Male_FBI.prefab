@@ -928,7 +928,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2330786470764804829}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.7
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -953,7 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abec9c466f350124284ab8b595fb5708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regularEnemyHealth: 100
+  regularEnemyHealth: 200
   bossHealth: 1200
   bloodImpactPrefab: {fileID: 1036925697551712, guid: a845e59c374ae0240812749e46f13033,
     type: 3}

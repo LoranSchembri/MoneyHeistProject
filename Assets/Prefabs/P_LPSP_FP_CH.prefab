@@ -868,6 +868,7 @@ GameObject:
   - component: {fileID: 6561142636108398121}
   - component: {fileID: -6736750182575119962}
   - component: {fileID: 3341687340987215079}
+  - component: {fileID: -3155015411824577417}
   m_Layer: 10
   m_Name: P_LPSP_FP_CH
   m_TagString: Player
@@ -1612,7 +1613,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  respawnPoint: {fileID: 0}
+  respawnPoint: {fileID: 8276328786479220419, guid: f5be690a90a2e68419227eb3185d67e8,
+    type: 3}
+--- !u!136 &-3155015411824577417
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2751027687307977091}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.626601
+  m_Height: 1.6185975
+  m_Direction: 1
+  m_Center: {x: -0.12660098, y: 1.186718, z: 0}
 --- !u!1 &2906013363015915789
 GameObject:
   m_ObjectHideFlags: 0
