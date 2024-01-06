@@ -209,8 +209,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 192.89, y: -240.3}
-  m_SizeDelta: {x: 635.7736, y: 505.59998}
+  m_AnchoredPosition: {x: 210.781, y: -240.3}
+  m_SizeDelta: {x: 671.555, y: 505.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1757531892883494300
 CanvasRenderer:
@@ -240,7 +240,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Controls
+  m_text: 'Objectives:
+
+    -Kill Enemies in the park to get to the Bank Entrance.
+
+    -Steal
+    the Money, Survive and get to the back of the bank
+
+    -Get to the CHopper To
+    get out alive
 
 
 
