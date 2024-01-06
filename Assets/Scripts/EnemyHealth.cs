@@ -46,6 +46,14 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
+    public static void KillAll()
+    {
+        EnemyHealth[] allEnemies = FindObjectsOfType<EnemyHealth>();
+        foreach (EnemyHealth enemy in allEnemies)
+        {
+            enemy.Die();
+        }
+    }
 
     void Die()
     {
