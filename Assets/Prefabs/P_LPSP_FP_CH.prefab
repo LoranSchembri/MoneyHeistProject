@@ -866,6 +866,7 @@ GameObject:
   - component: {fileID: 4190955791512926966}
   - component: {fileID: 601192529242639950}
   - component: {fileID: 6561142636108398121}
+  - component: {fileID: 4633509147058782353}
   m_Layer: 10
   m_Name: P_LPSP_FP_CH
   m_TagString: Player
@@ -1569,6 +1570,18 @@ MonoBehaviour:
   - {fileID: 4167758453430405102}
   hint: {fileID: 0}
   weightHint: 0
+--- !u!114 &4633509147058782353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2751027687307977091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af1f7d85596c9d41801a8bef306f197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2906013363015915789
 GameObject:
   m_ObjectHideFlags: 0

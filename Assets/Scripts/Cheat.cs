@@ -21,12 +21,12 @@ public class Cheat : MonoBehaviour
                 EnemyHealth.KillAll();
                 break;
             case "Level2Bank":
-                
+
+                break;
             case "Level3Helicopter":
-                // Custom logic for Level3Helicopter
+                
                 break;
         }
     }
 
-    // Rest of your script...
 }
