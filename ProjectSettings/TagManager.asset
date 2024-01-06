@@ -21,6 +21,9 @@ TagManager:
   - Waypoints
   - Walkable
   - SpawnPoint
+  - Bullet
+  - Boss
+  - BossSpawnPoint
   layers:
   - Default
   - TransparentFX
