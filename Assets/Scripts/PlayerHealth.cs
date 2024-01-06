@@ -18,9 +18,9 @@ public class PlayerHealth : MonoBehaviour
     public void Kill()
     {
         Debug.Log("Player is Dead!");
-        // Implement player death (disable movement, show death screen, etc.)
-        gameObject.SetActive(false); // Deactivates the player GameObject
-        // Here, you can add additional death logic such as animations, sounds, etc.
+
+        Destroy(gameObject);
+        
     }
 
     public void Revive()
