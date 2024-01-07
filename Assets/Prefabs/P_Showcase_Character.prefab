@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -7597520185599871269}
   - component: {fileID: -7076510161371515540}
   - component: {fileID: 5041045676904390929}
+  - component: {fileID: -4297038861367682314}
   m_Layer: 0
   m_Name: P_Showcase_Character
   m_TagString: Boss
@@ -76,9 +77,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4226a5f8828ee6b4987e4069d05b2180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 20
-  detectionRange: 20
-  moveSpeed: 10
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  range: 10
+  sightRange: 20
+  attackRange: 2
 --- !u!195 &-7597520185599871269
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -138,6 +145,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &-4297038861367682314
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190598020333319995}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 16c4b6c36252ce14e8083291c9e774fd, type: 3}
+  m_Controller: {fileID: 9100000, guid: 69b773133c4a41b419cc2569c9510ce3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6855999226480160615
 PrefabInstance:
   m_ObjectHideFlags: 0
