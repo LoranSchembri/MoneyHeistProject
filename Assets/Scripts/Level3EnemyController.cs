@@ -8,68 +8,87 @@ public class Level3EnemyController : MonoBehaviour
     public Transform player; // Player target, assign this in the Inspector
     private Animator animator;
     private NavMeshAgent agent;
-    public float attackDistance = 2.0f; // Adjust this as needed for helicopter
+    public float attackDistance = 3.0f; // Adjust this as needed for helicopter
     public float chasePlayerDistance = 5.0f; // Distance to start chasing the player
-    public float idleDuration = 2.0f; // Duration of the idle animation
     private Transform currentTarget;
+    public float idleDuration = 2.0f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         currentTarget = helicopter; // Start with helicopter as the target
-        StartCoroutine(BeginMovementAfterIdle());
+        StartCoroutine(ActivateMovementAfterIdle());
     }
 
-    IEnumerator BeginMovementAfterIdle()
+    IEnumerator ActivateMovementAfterIdle()
     {
-        yield return new WaitForSeconds(idleDuration);
-        agent.SetDestination(currentTarget.position);
-        animator.SetBool("isRunning", true);
+        // Wait for the idle animation to finish
+        yield return new WaitForSeconds(GetAnimationLength("Idle")); // Replace "Idle" with the name of your idle animation
+
+        // Start moving towards the current target
+        MoveTowardsTarget();
     }
 
     void Update()
     {
+        // Update target based on player's proximity
+        UpdateTarget();
+
+        // Check and handle attack logic
+        HandleAttack();
+    }
+
+    private void UpdateTarget()
+    {
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        float distanceToHelicopter = Vector3.Distance(transform.position, helicopter.position);
+        currentTarget = distanceToPlayer <= chasePlayerDistance ? player : helicopter;
+    }
 
-        // Check if the player is within chase range
-        if (distanceToPlayer <= chasePlayerDistance)
-        {
-            currentTarget = player;
-        }
-        else
-        {
-            currentTarget = helicopter;
-        }
-
-        // Move towards the current target
+    private void MoveTowardsTarget()
+    {
         agent.SetDestination(currentTarget.position);
+        animator.SetBool("isRunning", true);
+    }
 
-        // Attack logic based on the current target
-        float distanceToTarget = (currentTarget == helicopter) ? distanceToHelicopter : distanceToPlayer;
-        if (distanceToTarget <= attackDistance)
+    private void HandleAttack()
+    {
+        float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+        bool isAttacking = animator.GetBool("isPunching");
+
+        if (distanceToTarget <= attackDistance && !isAttacking)
         {
-            if (!animator.GetBool("isPunching"))
-            {
-                animator.SetBool("isRunning", false);
-                animator.SetBool("isPunching", true);
-                agent.isStopped = true;
+            animator.SetBool("isRunning", false);
+            animator.SetBool("isPunching", true);
+            agent.isStopped = true;
+            ApplyDamageIfNeeded();
+        }
+        else if (distanceToTarget > attackDistance && isAttacking)
+        {
+            animator.SetBool("isPunching", false);
+            animator.SetBool("isRunning", true);
+            agent.isStopped = false;
+        }
+    }
 
-                if (currentTarget == helicopter && animator.GetCurrentAnimatorStateInfo(0).IsName("Punching"))
-                {
-                    helicopter.GetComponent<HelicopterHealth>()?.TakeDamage(10f); // Damage amount
-                }
+    private void ApplyDamageIfNeeded()
+    {
+        if (currentTarget == helicopter && animator.GetCurrentAnimatorStateInfo(0).IsName("Punching"))
+        {
+            helicopter.GetComponent<HelicopterHealth>()?.TakeDamage(10f);
+        }
+    }
+
+    private float GetAnimationLength(string animationName)
+    {
+        RuntimeAnimatorController ac = animator.runtimeAnimatorController;
+        foreach (AnimationClip clip in ac.animationClips)
+        {
+            if (clip.name == animationName)
+            {
+                return clip.length;
             }
         }
-        else
-        {
-            if (!animator.GetBool("isRunning"))
-            {
-                animator.SetBool("isPunching", false);
-                animator.SetBool("isRunning", true);
-                agent.isStopped = false;
-            }
-        }
+        return 0f;
     }
 }
