@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int regularEnemyHealth = 100;
-    public int bossHealth = 300;
+    public int regularEnemyHealth = 200;
+    public int bossHealth = 1200;
     public GameObject bloodImpactPrefab; // Reference to the blood impact prefab
 
     private int currentHealth;

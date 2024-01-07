@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abec9c466f350124284ab8b595fb5708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regularEnemyHealth: 100
+  regularEnemyHealth: 200
   bossHealth: 1200
   bloodImpactPrefab: {fileID: 1036925697551712, guid: a845e59c374ae0240812749e46f13033,
     type: 3}
