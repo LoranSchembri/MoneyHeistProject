@@ -9,6 +9,7 @@ public class Level3EnemySpawner : MonoBehaviour
     public Transform helicopter;
     public float spawnInterval = 5.0f;
     public int specificSpawnPointIndex = 0;
+<<<<<<< HEAD
 =======
     public GameObject enemyPrefab; // Assign your enemy prefab in the Inspector
     public Transform[] spawnPoints; // Assign spawn points in the Inspector
@@ -16,6 +17,10 @@ public class Level3EnemySpawner : MonoBehaviour
     public float spawnInterval = 5.0f; // Time in seconds between spawns
     public int specificSpawnPointIndex = 0; // Index of the spawn point that spawns enemies periodically
 >>>>>>> Stashed changes
+=======
+    public Transform[] surroundPoints; // Points around the helicopter
+    private int nextPointIndex = 0; // To cycle through surround points
+>>>>>>> parent of a800586 (stuff)
 
     void Start()
     {
@@ -40,9 +45,14 @@ public class Level3EnemySpawner : MonoBehaviour
         {
 <<<<<<< Updated upstream
             enemyController.helicopter = helicopter;
+<<<<<<< HEAD
 =======
             enemyController.helicopter = helicopter; // Assign the helicopter reference
 >>>>>>> Stashed changes
+=======
+            enemyController.SetTarget(surroundPoints[nextPointIndex].position); // Direct to a surround point
+            nextPointIndex = (nextPointIndex + 1) % surroundPoints.Length; // Cycle through points
+>>>>>>> parent of a800586 (stuff)
         }
     }
 
