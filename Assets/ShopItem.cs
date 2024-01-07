@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class ShopTrigger : MonoBehaviour
+public class ShopItem : MonoBehaviour
     {
+    public string itemName;
+    public int quantity;
+    public GameObject itemPrefab;
     public GameObject shopCanvas; // Assign your shop canvas in the inspector
 
     private void OnTriggerEnter(Collider other)

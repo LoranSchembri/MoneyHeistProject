@@ -1,8 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Level2Bank/NavMesh-SM_Env_Floor_05.asset.meta
 guid: 33adae544eb553744913b616f89c2514
 NativeFormatImporter:
+========
+guid: a4bbd3baa43f44547835aca3bff90666
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> 7c0f138d5049b4862537338cdd5bc66c554c6031:Assets/Scenes/Level1Park.meta
   externalObjects: {}
-  mainObjectFileID: 23800000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

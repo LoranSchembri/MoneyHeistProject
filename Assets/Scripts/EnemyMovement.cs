@@ -2,118 +2,129 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
-    {
-    public float patrolSpeed = 2.0f;
-    public float chaseSpeed = 4.0f;
-    public float detectionRange = 10.0f;
+{
+    GameObject player;
+    NavMeshAgent agent;
 
-    private NavMeshAgent navMeshAgent;
-    private Transform[] waypoints;
-    private int waypointIndex = 0;
-    private bool isChasing = false;
-    private Transform player; // No longer assigned in the inspector
+    [SerializeField] LayerMask groundLayer, playerLayer;
 
-    private Vector3 lastPosition;
-    private float stuckThreshold = 0.1f; // Distance to check if stuck
-    private float checkStuckInterval = 2f; // Time interval to check if stuck
-    private float stuckTimer = 0f;
-    private float playerCheckInterval = 1f; // Interval to check for player's presence
-    private float nextPlayerCheckTime = 0f;
+    BoxCollider boxCollider;
+
+    //patrol
+    Vector3 destPoint;
+    bool walkpointSet;
+    [SerializeField] float range;
+    Animator animator;
+    
+    //State Change
+    [SerializeField] float sightRange, attackRange;
+    bool playerInSight, playerInAttackRange;
 
     void Start()
-        {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = patrolSpeed;
-
-        GameObject[] waypointsObjects = GameObject.FindGameObjectsWithTag("Waypoints");
-        waypoints = new Transform[waypointsObjects.Length];
-        for (int i = 0; i < waypointsObjects.Length; i++)
-            {
-            waypoints[i] = waypointsObjects[i].transform;
-            }
-
-        SelectRandomWaypoint();
-        lastPosition = transform.position;
-        }
+    {
+        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        animator = GetComponent<Animator>();
+        boxCollider = GetComponentInChildren<BoxCollider>();
+    }
 
     void Update()
-        {
-        if (Time.time >= nextPlayerCheckTime)
-            {
-            player = GameObject.FindGameObjectWithTag("Player")?.transform;
-            nextPlayerCheckTime = Time.time + playerCheckInterval;
-            }
+    {
+        playerInSight = Physics.CheckSphere(transform.position, sightRange, playerLayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
 
-        if (player != null && isChasing)
-            {
-            navMeshAgent.SetDestination(player.position);
-            }
+        if (playerInAttackRange)
+        {
+            Attack();
+        }
+        else if (playerInSight)
+        {
+            Chase();
+        }
         else
-            {
+        {
             Patrol();
-            DetectPlayer();
-            }
-
-        CheckIfStuck();
-        }
-
-    void Patrol()
-        {
-        if (navMeshAgent.remainingDistance < 1f)
-            {
-            SelectRandomWaypoint();
-            }
-        }
-
-    void SelectRandomWaypoint()
-        {
-        if (waypoints.Length == 0) return;
-
-        waypointIndex = Random.Range(0, waypoints.Length);
-        navMeshAgent.SetDestination(waypoints[waypointIndex].position);
-        }
-
-    void DetectPlayer()
-        {
-        if (player != null)
-            {
-            float distanceToPlayer = Vector3.Distance(player.position, transform.position);
-            if (distanceToPlayer < detectionRange)
-                {
-                isChasing = true;
-                navMeshAgent.speed = chaseSpeed;
-                }
-            else
-                {
-                isChasing = false;
-                navMeshAgent.speed = patrolSpeed;
-                }
-            }
-        }
-
-    void CheckIfStuck()
-        {
-        stuckTimer += Time.deltaTime;
-        if (stuckTimer >= checkStuckInterval)
-            {
-            if (Vector3.Distance(transform.position, lastPosition) < stuckThreshold)
-                {
-                SelectRandomWaypoint();
-                }
-            lastPosition = transform.position;
-            stuckTimer = 0f;
-            }
-        }
-
-    void OnCollisionEnter(Collision collision)
-        {
-        if (collision.gameObject.CompareTag("Player"))
-            {
-            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-                {
-                playerHealth.TakeDamage(10);
-                }
-            }
         }
     }
+
+    void Patrol()
+    {
+        if (!walkpointSet) SearchForDest();
+        if (walkpointSet) agent.SetDestination(destPoint);
+        if (Vector3.Distance(transform.position, destPoint) < 20) walkpointSet = false;
+    }
+
+    void Chase()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        if (player != null)
+        {
+            agent.SetDestination(player.transform.position);
+            Debug.Log("Chasing player at position: " + player.transform.position);
+        }
+        else
+        {
+            Debug.LogError("Player object not found for Chase.");
+        }
+    }
+
+
+    void Attack()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        if (player != null && animator.GetCurrentAnimatorStateInfo(0).IsName("Punching"))
+        {
+            animator.SetTrigger("Attack");
+            agent.SetDestination(transform.position);
+        }
+        else if (player == null)
+        {
+            Debug.LogError("Player object not found for Attack.");
+        }
+
+    }
+
+    void SearchForDest()
+    {
+        float z = Random.Range(-range, range);
+        float x = Random.Range(-range, range);
+
+        destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+
+        if(Physics.Raycast(destPoint,Vector3.down, groundLayer))
+        {
+            walkpointSet = true;
+        }
+    }
+
+    void EnableAttack()
+    {
+        boxCollider.enabled = true;
+    }
+
+    void DisableAttack()
+    {
+        boxCollider.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        float damageAmount = 10f;
+
+        var playerHealth = other.GetComponent<PlayerHealth>();
+         
+        if(playerHealth != null)
+        {
+            playerHealth.TakeDamage(damageAmount);
+            Debug.Log("Dealt " + damageAmount + " damage to the player.");
+        }
+    }
+}

@@ -1045,7 +1045,7 @@ MonoBehaviour:
   jumpGravity: 15
   jumpForce: 0.5
   stickToGroundForce: 0.03
-  canCrouch: 1
+  canCrouch: 0
   canCrouchWhileFalling: 0
   canJumpWhileCrouching: 0
   crouchHeight: 1.4

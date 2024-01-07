@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Level2Bank/NavMesh-SM_Env_Floor_04.asset.meta
 guid: 0aa2ae374302874499f5170ee7789158
+========
+guid: 6deceb955562d02498bc80eb6716b3ef
+>>>>>>>> 7c0f138d5049b4862537338cdd5bc66c554c6031:Assets/Scenes/Level1Park/NavMesh-Cube.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000

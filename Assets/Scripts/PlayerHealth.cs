@@ -1,37 +1,41 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health = 100;
-    public int maxHealth = 100;
+    public float health = 100f;
+    public float maxHealth = 100f;
     public GameObject respawnPoint;
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(float amount)
     {
-        health -= damageAmount;
+        health -= amount;
         if (health <= 0)
         {
-            Kill();
+            StartCoroutine(RespawnPlayer());
         }
     }
 
-    public void Kill()
+    private IEnumerator RespawnPlayer()
     {
         Debug.Log("Player is Dead!");
-
-        Destroy(gameObject);
+        gameObject.SetActive(false); 
         
+        yield return new WaitForSeconds(2);
+
+        Debug.Log("Respawning Player");
+        Revive();
     }
 
     public void Revive()
     {
-        // Set the player's position to the respawn point
+        
         transform.position = respawnPoint.transform.position;
 
-        // Reset health to max
+        
         this.health = maxHealth;
 
-        // Reactivate the player GameObject
+        
         gameObject.SetActive(true);
     }
 }
