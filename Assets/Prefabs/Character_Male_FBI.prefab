@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 1934846637987150167}
   - component: {fileID: -3833030859096240442}
   - component: {fileID: -4550201122808666271}
-  - component: {fileID: 6157851267623180489}
+  - component: {fileID: -582235779372170590}
   m_Layer: 0
   m_Name: Character_Male_FBI
   m_TagString: Enemy
@@ -893,7 +893,7 @@ Animator:
   m_GameObject: {fileID: 2330786470764804829}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 16c4b6c36252ce14e8083291c9e774fd, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 69b773133c4a41b419cc2569c9510ce3, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 1
   m_ApplyRootMotion: 1
@@ -916,9 +916,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4226a5f8828ee6b4987e4069d05b2180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSpeed: 2
-  chaseSpeed: 5
-  detectionRange: 20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  range: 15
+  sightRange: 20
+  attackRange: 2
 --- !u!195 &1934846637987150167
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -928,18 +934,18 @@ NavMeshAgent:
   m_GameObject: {fileID: 2330786470764804829}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
-  m_Speed: 3.5
+  m_Radius: 0.24
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.91
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &-3833030859096240442
 MonoBehaviour:
@@ -984,7 +990,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6157851267623180489
+--- !u!65 &-582235779372170590
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -999,12 +1005,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5414227, y: 1.7760488, z: 0.42067337}
-  m_Center: {x: 0.0075841546, y: 0.9098725, z: -0.008485794}
+  m_Size: {x: 0.5213517, y: 1.9455662, z: 0.41386032}
+  m_Center: {x: 0.004973352, y: 0.9662657, z: -0.012067795}
 --- !u!1 &2351375349689224919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,6 +2979,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3039065885388020148}
+  - component: {fileID: 3545204399781787397}
   m_Layer: 0
   m_Name: Hand_R
   m_TagString: Untagged
@@ -2998,6 +3005,27 @@ Transform:
   m_Father: {fileID: 3058472054122573413}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3545204399781787397
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406712791693368143}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 32.121826, y: 18.413404, z: 16.511984}
+  m_Center: {x: -1.5686038, y: 2.824062, z: -0.040007636}
 --- !u!1 &7422697706129080021
 GameObject:
   m_ObjectHideFlags: 0
