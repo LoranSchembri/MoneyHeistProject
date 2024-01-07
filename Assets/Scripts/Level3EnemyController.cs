@@ -11,7 +11,10 @@ public class Level3EnemyController : MonoBehaviour
     public float attackDistance = 2.0f; // Adjust this as needed for helicopter
     public float chasePlayerDistance = 5.0f; // Distance to start chasing the player
     public float idleDuration = 2.0f; // Duration of the idle animation
+<<<<<<< Updated upstream
     private Transform currentTarget;
+=======
+>>>>>>> Stashed changes
 
     void Start()
     {
