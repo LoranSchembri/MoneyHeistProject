@@ -8,16 +8,18 @@ public class EnemyLoitering : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     private Transform[] waypoints;
     private int waypointIndex = 0;
-
-    private Vector3 lastPosition;
-    private float stuckThreshold = 0.1f; // Distance to check if stuck
-    private float checkStuckInterval = 2f; // Time interval to check if stuck
-    private float stuckTimer = 0f;
+    private Animator animator;
 
     void Start()
         {
+        animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.speed = patrolSpeed;
+
+        if (navMeshAgent != null)
+            {
+            navMeshAgent.enabled = true; // Ensure the NavMeshAgent is enabled
+            navMeshAgent.speed = patrolSpeed;
+            }
 
         GameObject[] waypointsObjects = GameObject.FindGameObjectsWithTag("Waypoints");
         waypoints = new Transform[waypointsObjects.Length];
@@ -27,22 +29,30 @@ public class EnemyLoitering : MonoBehaviour
             }
 
         SelectRandomWaypoint();
-        lastPosition = transform.position;
         }
 
     void Update()
         {
         Patrol();
-        CheckIfStuck();
         }
 
     void Patrol()
         {
-        if (navMeshAgent.remainingDistance < 1f)
+        // Check if the enemy is close to the current waypoint
+        if (navMeshAgent.remainingDistance < 1f && !navMeshAgent.pathPending)
             {
+            // Select the next waypoint
             SelectRandomWaypoint();
             }
+
+        // Check if the enemy is moving towards a waypoint
+        if (navMeshAgent.remainingDistance > 1f || !navMeshAgent.isStopped)
+            {
+            // Start walk/run animation
+            animator.SetBool("isRunning", true);
+            }
         }
+
 
     void SelectRandomWaypoint()
         {
@@ -50,20 +60,6 @@ public class EnemyLoitering : MonoBehaviour
 
         waypointIndex = Random.Range(0, waypoints.Length);
         navMeshAgent.SetDestination(waypoints[waypointIndex].position);
-        }
-
-    void CheckIfStuck()
-        {
-        stuckTimer += Time.deltaTime;
-        if (stuckTimer >= checkStuckInterval)
-            {
-            if (Vector3.Distance(transform.position, lastPosition) < stuckThreshold)
-                {
-                SelectRandomWaypoint();
-                }
-            lastPosition = transform.position;
-            stuckTimer = 0f;
-            }
         }
 
     void OnCollisionEnter(Collision collision)
@@ -74,6 +70,7 @@ public class EnemyLoitering : MonoBehaviour
             if (playerHealth != null)
                 {
                 playerHealth.TakeDamage(10);
+                animator.SetTrigger("isPunching"); // Play attack animation
                 }
             }
         }

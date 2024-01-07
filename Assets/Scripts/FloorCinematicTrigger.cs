@@ -1,11 +1,20 @@
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class FloorCinematicTrigger : MonoBehaviour
     {
     public CinemachineVirtualCamera dollyCamera; // Assign in inspector
-    private int mainCameraPriority = 10; // Assuming main camera's priority is 10
+
+    void Start()
+        {
+        if (dollyCamera != null)
+            {
+            // Set initial priority lower than the main camera
+            dollyCamera.Priority = 9;
+            }
+        }
 
     private void OnTriggerEnter(Collider other)
         {
@@ -19,8 +28,9 @@ public class FloorCinematicTrigger : MonoBehaviour
         {
         if (dollyCamera != null)
             {
-            dollyCamera.Priority = 11; // Higher priority to take over
-            StartCoroutine(ReturnToMainCameraAfterDelay(5f)); // Wait 5 seconds before returning to main camera
+            // Increase priority to take over
+            dollyCamera.Priority = 11;
+            StartCoroutine(ChangeSceneAfterDelay(6f)); // Wait 6 seconds before changing the scene
             }
         else
             {
@@ -28,12 +38,9 @@ public class FloorCinematicTrigger : MonoBehaviour
             }
         }
 
-    private IEnumerator ReturnToMainCameraAfterDelay(float delay)
+    private IEnumerator ChangeSceneAfterDelay(float delay)
         {
         yield return new WaitForSeconds(delay);
-        if (dollyCamera != null)
-            {
-            dollyCamera.Priority = mainCameraPriority - 1; // Lower priority to return to main camera
-            }
+        SceneManager.LoadScene("Level3Helicopter"); // Change to your desired scene name
         }
     }

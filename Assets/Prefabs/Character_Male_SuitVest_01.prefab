@@ -1199,12 +1199,12 @@ GameObject:
   - component: {fileID: 9581920}
   - component: {fileID: 5543266444219839145}
   - component: {fileID: -351653079375036375}
-  - component: {fileID: 1024562324484192181}
   - component: {fileID: 4449730235518029759}
   - component: {fileID: 5624261887391029059}
+  - component: {fileID: -6841813953240637069}
   m_Layer: 0
   m_Name: Character_Male_SuitVest_01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1245,9 +1245,9 @@ Animator:
   m_GameObject: {fileID: 139058}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 16c4b6c36252ce14e8083291c9e774fd, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 31c51aa6d6f1d944e9ea0d09bd6c8d02, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -1305,21 +1305,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1024562324484192181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4226a5f8828ee6b4987e4069d05b2180, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolSpeed: 2
-  chaseSpeed: 5
-  detectionRange: 20
 --- !u!114 &4449730235518029759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,7 +1317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abec9c466f350124284ab8b595fb5708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regularEnemyHealth: 100
+  regularEnemyHealth: 200
   bossHealth: 1200
   bloodImpactPrefab: {fileID: 1036925697551712, guid: a845e59c374ae0240812749e46f13033,
     type: 3}
@@ -1357,6 +1342,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5414227, y: 1.776049, z: 0.4206734}
   m_Center: {x: 0.007584155, y: 0.9098725, z: -0.008485794}
+--- !u!114 &-6841813953240637069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d3d85a4c9b0fe1468eb34bcfebbc7b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolSpeed: 2
 --- !u!1 &139826
 GameObject:
   m_ObjectHideFlags: 0
