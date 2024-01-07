@@ -117,7 +117,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        float damageAmount = 10f;
+        int damageAmount = 10;
 
         var playerHealth = other.GetComponent<PlayerHealth>();
          
