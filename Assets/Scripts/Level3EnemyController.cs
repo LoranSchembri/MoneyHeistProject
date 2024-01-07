@@ -9,12 +9,18 @@ public class Level3EnemyController : MonoBehaviour
     private NavMeshAgent agent;
     public float attackDistance = 2.0f; // Adjust this as needed
     public float idleDuration = 2.0f; // Duration of the idle animation
+    private Vector3 targetPosition;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         StartCoroutine(BeginMovementAfterIdle());
+    }
+
+    public void SetTarget(Vector3 target)
+    {
+        targetPosition = target; // Set the target position
     }
 
     IEnumerator BeginMovementAfterIdle()
