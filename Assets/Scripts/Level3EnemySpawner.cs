@@ -8,8 +8,6 @@ public class Level3EnemySpawner : MonoBehaviour
     public Transform helicopter;
     public float spawnInterval = 5.0f;
     public int specificSpawnPointIndex = 0;
-    public Transform[] surroundPoints; // Points around the helicopter
-    private int nextPointIndex = 0; // To cycle through surround points
 
     void Start()
     {
@@ -31,8 +29,6 @@ public class Level3EnemySpawner : MonoBehaviour
         if (enemyController != null)
         {
             enemyController.helicopter = helicopter;
-            enemyController.SetTarget(surroundPoints[nextPointIndex].position); // Direct to a surround point
-            nextPointIndex = (nextPointIndex + 1) % surroundPoints.Length; // Cycle through points
         }
     }
 

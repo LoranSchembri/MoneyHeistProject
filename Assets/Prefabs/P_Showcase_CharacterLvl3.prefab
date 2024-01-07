@@ -76,9 +76,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4226a5f8828ee6b4987e4069d05b2180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSpeed: 2
-  chaseSpeed: 5
-  detectionRange: 20
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  range: 0
+  sightRange: 0
+  attackRange: 0
 --- !u!195 &-7597520185599871269
 NavMeshAgent:
   m_ObjectHideFlags: 0

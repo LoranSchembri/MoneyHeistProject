@@ -105,16 +105,6 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
-    void EnableAttack()
-    {
-        boxCollider.enabled = true;
-    }
-
-    void DisableAttack()
-    {
-        boxCollider.enabled = false;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         int damageAmount = 10;

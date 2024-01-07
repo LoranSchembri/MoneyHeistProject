@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 6426137256893753359}
   - component: {fileID: 1421796800736923861}
   - component: {fileID: -2274665283779201341}
+  - component: {fileID: 7837838753297456490}
   - component: {fileID: 4165436730142111176}
   m_Layer: 0
   m_Name: Character_Male_SWAT_01
@@ -230,7 +231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helicopter: {fileID: 0}
+  player: {fileID: 2748913124992463393, guid: 19eadcf8fbed56b4da77ca94c1b4145f, type: 3}
   attackDistance: 2
+  chasePlayerDistance: 5
   idleDuration: 1.5
 --- !u!114 &-2274665283779201341
 MonoBehaviour:
@@ -249,7 +252,21 @@ MonoBehaviour:
   helicopter: {fileID: 0}
   spawnInterval: 5
   specificSpawnPointIndex: 0
-  surroundPoints: []
+--- !u!114 &7837838753297456490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555069040081292849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abec9c466f350124284ab8b595fb5708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularEnemyHealth: 200
+  bossHealth: 300
+  bloodImpactPrefab: {fileID: 166404, guid: 78e1c8c5b281b8b439229473779ac9aa, type: 3}
 --- !u!54 &4165436730142111176
 Rigidbody:
   m_ObjectHideFlags: 0
